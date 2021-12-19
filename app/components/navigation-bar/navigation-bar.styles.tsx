@@ -47,7 +47,7 @@ const BACK_BUTTON: ViewStyle = {
   backgroundColor: "rgba(0,0,0,0.3)",
   position: "absolute",
   top: 40,
-  left: 15,
+  left: 16,
   borderRadius: 50,
 }
 

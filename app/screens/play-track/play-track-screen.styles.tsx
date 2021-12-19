@@ -9,13 +9,13 @@ const ROOT: ViewStyle = {
 }
 
 const COVER: ViewStyle = {
-  flex: 0.5,
+  flex: 0.65,
   justifyContent: "flex-end",
 }
 const COVER_IMAGE: ImageStyle = {
-  height: windowWidth,
+  height: "100%",
   width: windowWidth,
-  resizeMode: "contain",
+  resizeMode: "cover",
 }
 const COVER_INNER_CIRCLE: ViewStyle = {
   position: "absolute",
@@ -35,11 +35,11 @@ const GRADIENT: string[] = [
   "transparent",
 ].reverse()
 
-const HEADER: TextStyle = { position: "absolute", bottom: 60, left: 10, marginVertical: 10 }
-const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 30, left: 10, marginVertical: 5 }
-const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
+const HEADER: TextStyle = { position: "absolute", bottom: 60, left: 16, marginVertical: 10 }
+const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 30, left: 16, marginVertical: 5 }
+const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 16, marginVertical: 5 }
 
-const PLAYER_INFO_CONTANER: ViewStyle = { flex: 0.5 }
+const PLAYER_INFO_CONTANER: ViewStyle = { flex: 0.35 }
 
 const PLAYER_POSITION: ViewStyle = {
   flex: 0.5,
@@ -84,5 +84,5 @@ export {
   SEEK_ICON,
   PLAY_PAUSE_ICON,
   DISCLAIMER,
-  PLAYER_INFO_CONTANER
+  PLAYER_INFO_CONTANER,
 }

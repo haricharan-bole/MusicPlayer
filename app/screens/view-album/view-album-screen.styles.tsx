@@ -15,7 +15,7 @@ const COVER: ViewStyle = {
 const COVER_IMAGE: ImageStyle = {
   height: "100%",
   width: windowWidth,
-  resizeMode: "contain",
+  resizeMode: "cover",
 }
 
 const GRADIENT_CONTAINER: ViewStyle = { width: windowWidth, height: windowHeight }
@@ -28,8 +28,8 @@ const GRADIENT: string[] = [
   "transparent",
 ].reverse()
 
-const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 16, marginVertical: 10 }
-const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 25, left: 16, marginVertical: 5 }
+const HEADER: TextStyle = { position: "absolute", bottom: 60, left: 16, marginVertical: 10 }
+const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 30, left: 16, marginVertical: 5 }
 const TRACKS_COUNT: TextStyle = { position: "absolute", bottom: 10, left: 16, marginVertical: 5 }
 
 const TRACKS_CONTAINER: ViewStyle = { flex: 0.7, alignItems: "center", justifyContent: "center" }

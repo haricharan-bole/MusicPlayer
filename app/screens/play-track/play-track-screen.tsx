@@ -110,7 +110,7 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
               <Text preset="header">
                 {`${AppPlayer.secondsToHHMMSS(
                   Math.floor(progress.position || 0),
-                )}/${AppPlayer.secondsToHHMMSS(Math.floor(30 || 0))}`}
+                )} / ${AppPlayer.secondsToHHMMSS(Math.floor(30 || 0))}`}
               </Text>
             )}
           </View>
