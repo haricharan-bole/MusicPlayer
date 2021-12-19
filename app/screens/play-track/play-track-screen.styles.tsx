@@ -60,8 +60,10 @@ const TRACK_ITEM_CONTAINER: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
 }
-
+const PLAY_PAUSE_ICON: ImageStyle = { height: 60, width: 60 }
 const PLAYER_ICON: ImageStyle = { height: 40, width: 40 }
+const SEEK_ICON: ImageStyle = { height: 30, width: 30 }
+const DISCLAIMER: TextStyle = { position: "absolute", bottom: 5, alignSelf: "center" }
 
 export {
   ROOT,
@@ -77,4 +79,7 @@ export {
   PLAYER_POSITION,
   ALBUM_NAME,
   ARTIST_NAME,
+  SEEK_ICON,
+  PLAY_PAUSE_ICON,
+  DISCLAIMER,
 }

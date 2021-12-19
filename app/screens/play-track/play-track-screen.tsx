@@ -21,6 +21,9 @@ import {
   PLAYER_POSITION,
   ALBUM_NAME,
   ARTIST_NAME,
+  SEEK_ICON,
+  PLAY_PAUSE_ICON,
+  DISCLAIMER
 } from "./play-track-screen.styles"
 import AppPlayer from "../../services/AppPlayer"
 import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
@@ -112,29 +115,29 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
           </View>
           <View style={PLAYER_CONTROLS_CONTAINER}>
             <TouchableOpacity onPress={handleBackWard}>
-              <Icon icon="backward" style={PLAYER_ICON} />
+              <Icon icon="backward" style={SEEK_ICON} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handlePrev}>
               <Icon icon="prev" style={PLAYER_ICON} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handlePlayPause} activeOpacity={1}>
               {isPlaying ? (
-                <Icon icon="pause" style={{ height: 60, width: 60 }} />
+                <Icon icon="pause" style={PLAY_PAUSE_ICON} />
               ) : (
-                <Icon icon="play" style={{ height: 60, width: 60 }} />
+                <Icon icon="play" style={PLAY_PAUSE_ICON} />
               )}
             </TouchableOpacity>
             <TouchableOpacity onPress={handleNext}>
               <Icon icon="next" style={PLAYER_ICON} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleForward}>
-              <Icon icon="forward" style={PLAYER_ICON} />
+              <Icon icon="forward" style={SEEK_ICON} />
             </TouchableOpacity>
           </View>
           <Text
             preset="secondary"
             text="This is a free preview powered by Napster."
-            style={{ position: "absolute", bottom: 5, alignSelf: "center" }}
+            style={DISCLAIMER}
           />
         </View>
       </Screen>
