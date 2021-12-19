@@ -79,11 +79,17 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
     }
 
     const handleNext = () => {
+      if (selectedTrackIndex >= TrackPlayerTracks.length - 1) {
+        setSelectedTrackIndex(0)
+      }
       setSelectedTrackIndex(selectedTrackIndex + 1)
       TrackPlayer.skipToNext()
     }
 
     const handlePrev = () => {
+      if (selectedTrackIndex === 0) {
+        setSelectedTrackIndex(TrackPlayerTracks.length - 1)
+      }
       setSelectedTrackIndex(selectedTrackIndex - 1)
       TrackPlayer.skipToPrevious()
     }
