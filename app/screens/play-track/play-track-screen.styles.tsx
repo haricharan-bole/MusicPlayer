@@ -35,8 +35,8 @@ const GRADIENT: string[] = [
   "transparent",
 ].reverse()
 
-const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 10, marginVertical: 10 }
-const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 25, left: 10, marginVertical: 5 }
+const HEADER: TextStyle = { position: "absolute", bottom: 60, left: 10, marginVertical: 10 }
+const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 30, left: 10, marginVertical: 5 }
 const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
 
 const PLAYER_INFO_CONTANER: ViewStyle = { flex: 0.5 }

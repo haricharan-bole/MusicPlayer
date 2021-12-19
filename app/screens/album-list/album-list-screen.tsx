@@ -4,7 +4,7 @@ import { FlatList, StatusBar, Dimensions, ActivityIndicator } from "react-native
 import { Screen } from "../../components"
 import { useStores } from "../../models"
 import { AlbumGridItem } from "../../components/album-grid-item/album-grid-item"
-import { ROOT } from "./album-list-screen.styles"
+import { ROOT, PAGINATION_LOADING } from "./album-list-screen.styles"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
@@ -74,11 +74,7 @@ export const AlbumListScreen: FC<StackScreenProps<NavigatorParamList, "AlbumList
           />
         )}
         {isLoading && albums.length > 0 && (
-          <ActivityIndicator
-            size="large"
-            color="red"
-            style={{ position: "absolute", bottom: 20, alignSelf: "center" }}
-          />
+          <ActivityIndicator size="large" color="red" style={PAGINATION_LOADING} />
         )}
       </Screen>
     )

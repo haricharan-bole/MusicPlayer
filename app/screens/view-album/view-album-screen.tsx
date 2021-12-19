@@ -23,10 +23,10 @@ import {
   TRACK_ITEM_ICON,
   TRACKS_COUNT,
   ARTIST_NAME,
+  HEADER,
 } from "./view-album-screen.styles"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
-import { ALBUM_NAME } from "../../components/album-grid-item/album-grid-item.styles"
 
 export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum">> = observer(
   function AlbumListScreen({ navigation }) {
@@ -110,7 +110,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
         />
         <ImageBackground source={hdImage} style={COVER} imageStyle={COVER_IMAGE}>
           <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
-            <Text preset="header" text={selectedAlbum.name} style={ALBUM_NAME} />
+            <Text preset="header" text={selectedAlbum.name} style={HEADER} />
             <Text preset="default" text={selectedAlbum.artistName} style={ARTIST_NAME} />
             <Text
               preset="secondary"

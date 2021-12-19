@@ -1,5 +1,4 @@
 import { StyleProp, ViewStyle } from "react-native"
-import { ContributingArtists } from "../../models"
 
 export default interface AlbumGridItemProps {
   /**
@@ -8,37 +7,37 @@ export default interface AlbumGridItemProps {
   style?: StyleProp<ViewStyle>
 
   /**
-   * An optional style override useful for padding & margin.
+   * List of all contributing artists names.
    */
   artists?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * Release date of album.
    */
   releaseDate?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * Count of tracks.
    */
   numberOfTracks?: number
 
   /**
-   * An optional style override useful for padding & margin.
+   * Title of Track.
    */
   name?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * id of album.
    */
   albumId?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * Main artist name.
    */
   artistName?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * onPress Handler.
    */
   onAlbumPress?: () => void
 }

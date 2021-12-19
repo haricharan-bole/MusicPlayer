@@ -1,5 +1,5 @@
 import * as React from "react"
-import { StyleProp, View, ViewStyle, TouchableOpacity } from "react-native"
+import { View, TouchableOpacity } from "react-native"
 import { observer } from "mobx-react-lite"
 import LinearGradient from "react-native-linear-gradient"
 import { Icon, Text } from ".."
@@ -15,17 +15,12 @@ import {
 
 export interface NavigationBarProps {
   /**
-   * An optional style override useful for padding & margin.
-   */
-  style?: StyleProp<ViewStyle>
-
-  /**
-   * An optional style override useful for padding & margin.
+   * An optional screen heading.
    */
   heading?: string
 
   /**
-   * An optional style override useful for padding & margin.
+   * Handler for Icon Press.
    */
   onPress?: () => void
 }
@@ -41,7 +36,7 @@ export const NavigationBar = observer(function NavigationBar(props: NavigationBa
           <Text preset="header" text={props.heading} style={HEADER} />
         ) : (
           <TouchableOpacity onPress={props.onPress} style={BACK_BUTTON}>
-            <Icon icon="back" style={BACK_ICON} />
+            <Icon icon="greenBack" style={BACK_ICON} />
           </TouchableOpacity>
         )}
       </LinearGradient>

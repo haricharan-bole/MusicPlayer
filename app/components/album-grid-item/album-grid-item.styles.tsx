@@ -41,13 +41,7 @@ const ARTIST_NAME: TextStyle = {
 
 const DATE: TextStyle = { textAlign: "right", padding: 4, position: "absolute", bottom: 4, left: 4 }
 
-const TRACK_COUNT: TextStyle = {
-  textAlign: "right",
-  padding: 4,
-  position: "absolute",
-  bottom: 4,
-  right: 4,
-}
+const TRACK_COUNT: TextStyle = { textAlign: "right", padding: 4, position: "absolute", bottom: 4, right: 4 }
 
 export {
   IMAGE_BACKGROUND,

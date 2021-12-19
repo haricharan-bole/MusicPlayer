@@ -8,6 +8,7 @@ export const icons = {
   forward: require("./10sForward.png"),
   backward: require("./10sBack.png"),
   pause: require("./pause.png"),
+  greenBack: require("./previous.png"),
 }
 
 export type IconTypes = keyof typeof icons

@@ -34,4 +34,6 @@ const GRADIENT: string[] = [
 
 const GRADIENT_CONTAINER: ViewStyle = { width: windowWidth, height: windowHeight * 0.15 }
 
-export { ROOT, HEADER, HEADER_CONTAINER, GRADIENT, GRADIENT_CONTAINER }
+const PAGINATION_LOADING: ViewStyle = { position: "absolute", bottom: 20, alignSelf: "center" }
+
+export { ROOT, HEADER, HEADER_CONTAINER, GRADIENT, GRADIENT_CONTAINER, PAGINATION_LOADING }

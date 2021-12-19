@@ -28,9 +28,9 @@ const GRADIENT: string[] = [
   "transparent",
 ].reverse()
 
-const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 10, marginVertical: 10 }
-const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 25, left: 10, marginVertical: 5 }
-const TRACKS_COUNT: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
+const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 16, marginVertical: 10 }
+const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 25, left: 16, marginVertical: 5 }
+const TRACKS_COUNT: TextStyle = { position: "absolute", bottom: 10, left: 16, marginVertical: 5 }
 
 const TRACKS_CONTAINER: ViewStyle = { flex: 0.7, alignItems: "center", justifyContent: "center" }
 

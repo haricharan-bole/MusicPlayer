@@ -1,7 +1,6 @@
 import * as React from "react"
 import { storiesOf } from "@storybook/react-native"
 import { StoryScreen, Story, UseCase } from "../../../storybook/views"
-import { color } from "../../theme"
 import { NavigationBar } from "./navigation-bar"
 
 storiesOf("NavigationBar", module)
@@ -9,7 +8,7 @@ storiesOf("NavigationBar", module)
   .add("Style Presets", () => (
     <Story>
       <UseCase text="Primary" usage="The primary.">
-        <NavigationBar style={{ backgroundColor: color.error }} />
+        <NavigationBar />
       </UseCase>
     </Story>
   ))

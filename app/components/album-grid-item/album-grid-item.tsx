@@ -17,7 +17,7 @@ import DateFormatter from "../../utils/date-formatter"
 import { getImageURL, AssetType } from "../../services/api/get-image-url"
 
 /**
- * Describe your component here
+ * Stateless Grid Item component for loading album tiles
  */
 export const AlbumGridItem = function AlbumGridItem(props: AlbumGridItemProps) {
   const { numberOfTracks, releaseDate, albumId, artists, name, onAlbumPress } = props
