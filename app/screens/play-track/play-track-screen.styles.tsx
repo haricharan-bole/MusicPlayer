@@ -42,11 +42,9 @@ const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 10, mar
 const PLAYER_POSITION: ViewStyle = {
   flex: 0.5,
   alignItems: "center",
-  flexDirection: "row",
   width: windowWidth,
   justifyContent: "space-around",
 }
-
 
 const PLAYER_CONTROLS_CONTAINER: ViewStyle = {
   flex: 0.5,
@@ -78,5 +76,5 @@ export {
   PLAYER_ICON,
   PLAYER_POSITION,
   ALBUM_NAME,
-  ARTIST_NAME
+  ARTIST_NAME,
 }

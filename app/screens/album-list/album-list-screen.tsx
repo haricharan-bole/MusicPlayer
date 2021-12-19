@@ -1,19 +1,13 @@
 import React, { FC, useEffect } from "react"
 import { observer } from "mobx-react-lite"
-import { View, FlatList, StatusBar, Dimensions } from "react-native"
-import { Screen, Text } from "../../components"
+import { FlatList, StatusBar, Dimensions, ActivityIndicator } from "react-native"
+import { Screen } from "../../components"
 import { useStores } from "../../models"
 import { AlbumGridItem } from "../../components/album-grid-item/album-grid-item"
-import LinearGradient from "react-native-linear-gradient"
-import {
-  ROOT,
-  HEADER,
-  HEADER_CONTAINER,
-  GRADIENT,
-  GRADIENT_CONTAINER,
-} from "./album-list-screen.styles"
+import { ROOT } from "./album-list-screen.styles"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
+import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
 
 const windowWidth = Dimensions.get("window").width
 
@@ -26,6 +20,7 @@ export const AlbumListScreen: FC<StackScreenProps<NavigatorParamList, "AlbumList
       setSelectedAlbumIndex,
       getContributingArtistNames,
       artistNames,
+      isLoading,
     } = albumStore
     const fetchAlbums = () => {
       read()
@@ -59,13 +54,11 @@ export const AlbumListScreen: FC<StackScreenProps<NavigatorParamList, "AlbumList
 
     return (
       <Screen style={ROOT} preset="fixed">
-        <StatusBar backgroundColor={"black"} />
-        <View style={HEADER_CONTAINER}>
-          <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
-            <Text preset="header" text="Top Albums" style={HEADER} />
-          </LinearGradient>
-        </View>
-        {albums && artistNames.size > 0 && (
+        <StatusBar backgroundColor={"rgba(0,0,0,0.9)"} translucent />
+        <NavigationBar heading="Top Albums" />
+        {isLoading && albums.length === 0 ? (
+          <ActivityIndicator size="large" color="red" />
+        ) : (
           <FlatList
             data={[...albums]}
             numColumns={2}
@@ -78,6 +71,13 @@ export const AlbumListScreen: FC<StackScreenProps<NavigatorParamList, "AlbumList
               offset: (windowWidth / 2) * index,
               index,
             })}
+          />
+        )}
+        {isLoading && albums.length > 0 && (
+          <ActivityIndicator
+            size="large"
+            color="red"
+            style={{ position: "absolute", bottom: 20, alignSelf: "center" }}
           />
         )}
       </Screen>

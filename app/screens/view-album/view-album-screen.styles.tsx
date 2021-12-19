@@ -9,11 +9,11 @@ const ROOT: ViewStyle = {
 }
 
 const COVER: ViewStyle = {
-  flex: 0.5,
+  flex: 0.3,
   justifyContent: "flex-end",
 }
 const COVER_IMAGE: ImageStyle = {
-  height: windowWidth,
+  height: "100%",
   width: windowWidth,
   resizeMode: "contain",
 }
@@ -32,7 +32,7 @@ const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 10, marginVe
 const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 25, left: 10, marginVertical: 5 }
 const TRACKS_COUNT: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
 
-const TRACKS_CONTAINER: ViewStyle = { flex: 0.5, alignItems: "center" }
+const TRACKS_CONTAINER: ViewStyle = { flex: 0.7, alignItems: "center", justifyContent: "center" }
 
 const TRACK_ITEM_CONTAINER: ViewStyle = {
   width: windowWidth - 32,

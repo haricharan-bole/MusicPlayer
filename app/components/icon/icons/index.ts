@@ -1,5 +1,5 @@
 export const icons = {
-  back: require("./arrow-left.png"),
+  back: require("./back.png"),
   bullet: require("./bullet.png"),
   bug: require("./ladybug.png"),
   play: require("./play.png"),

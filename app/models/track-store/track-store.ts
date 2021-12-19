@@ -1,4 +1,4 @@
-import { Instance, SnapshotOut, types, flow, setLivelinessChecking } from "mobx-state-tree"
+import { Instance, SnapshotOut, types, flow } from "mobx-state-tree"
 import { TrackModel, TrackSnapshot, Track } from "../track/track"
 import { withEnvironment } from "../extensions/with-environment"
 import { TrackApi } from "../../services/api/track-api"
@@ -18,6 +18,7 @@ export const TrackStoreModel = types
     tracks: types.optional(types.array(TrackModel), []),
     selectedTrackIndex: types.optional(types.number, 0),
     artistNames: types.map(ArtistIdName),
+    isLoading: types.optional(types.boolean, false),
   })
   .extend(withEnvironment)
   .views((self) => ({
@@ -47,9 +48,9 @@ export const TrackStoreModel = types
   }))
   .actions((self) => ({
     read: flow(function* (albumId: string) {
+      self.isLoading = true
       const trackApi = new TrackApi(self.environment.api)
       const albumApi = new AlbumApi(self.environment.api)
-
       const result = yield trackApi.getTracks(albumId)
       if (result.kind === "ok") {
         self.tracks.clear()
@@ -85,8 +86,7 @@ export const TrackStoreModel = types
             self.artistNames.set(artistId, { name: nameApiResult.artistNames[index] })
           })
         }
-
-        console.log(self.artistNames)
+        self.isLoading = false
       } else {
         __DEV__ && console.tron.log(result.kind)
       }

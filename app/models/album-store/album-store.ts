@@ -17,6 +17,7 @@ export const AlbumStoreModel = types
     albums: types.optional(types.array(AlbumModel), []),
     selectedAlbumIndex: types.optional(types.number, 0),
     artistNames: types.map(ArtistIdName),
+    isLoading: types.optional(types.boolean, false),
   })
   .extend(withEnvironment)
   .views((self) => ({
@@ -44,6 +45,7 @@ export const AlbumStoreModel = types
   }))
   .actions((self) => ({
     read: flow(function* () {
+      self.isLoading = true
       const albumApi = new AlbumApi(self.environment.api)
       const result = yield albumApi.getAlbums(self.albums.length)
       if (result.kind === "ok") {
@@ -80,6 +82,7 @@ export const AlbumStoreModel = types
             self.artistNames.set(artistId, { name: nameApiResult.artistNames[index] })
           })
         }
+        self.isLoading = false
       } else {
         __DEV__ && console.tron.log(result.kind)
       }

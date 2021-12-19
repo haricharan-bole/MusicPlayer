@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ImageBackground, TouchableOpacity } from "react-native"
-import { Screen, Text, Button, Icon } from "../../components"
+import { View, ImageBackground, TouchableOpacity, ActivityIndicator } from "react-native"
+import { Screen, Text, Icon } from "../../components"
 import { useStores } from "../../models"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { AssetType, getImageURL } from "../../services/api/get-image-url"
 import LinearGradient from "react-native-linear-gradient"
-import TrackPlayer, { useProgress, useTrackPlayerEvents, Event } from "react-native-track-player"
+import TrackPlayer, { useProgress } from "react-native-track-player"
 
 import {
   ROOT,
@@ -23,6 +23,7 @@ import {
   ARTIST_NAME,
 } from "./play-track-screen.styles"
 import AppPlayer from "../../services/AppPlayer"
+import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
 
 export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum">> = observer(
   function PlayTrackScreen({ navigation }) {
@@ -48,6 +49,7 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
     }, [])
 
     useEffect(() => {
+      TrackPlayer.reset()
       TrackPlayer.add(TrackPlayerTracks)
       TrackPlayer.skip(selectedTrackIndex)
       TrackPlayer.play()
@@ -84,6 +86,11 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
 
     return (
       <Screen style={ROOT} preset="fixed">
+        <NavigationBar
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
         <ImageBackground source={image} style={COVER} imageStyle={COVER_IMAGE}>
           <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
             <Text preset="header" text={selectedTrack.name} style={HEADER} />
@@ -93,11 +100,15 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
         </ImageBackground>
         <View style={{ flex: 0.5 }}>
           <View style={PLAYER_POSITION}>
-            <Text preset="header">
-              {`${AppPlayer.secondsToHHMMSS(
-                Math.floor(progress.position || 0),
-              )}/${AppPlayer.secondsToHHMMSS(Math.floor(30 || 0))}`}
-            </Text>
+            {progress.position === 0 ? (
+              <ActivityIndicator size="large" color="red" />
+            ) : (
+              <Text preset="header">
+                {`${AppPlayer.secondsToHHMMSS(
+                  Math.floor(progress.position || 0),
+                )}/${AppPlayer.secondsToHHMMSS(Math.floor(30 || 0))}`}
+              </Text>
+            )}
           </View>
           <View style={PLAYER_CONTROLS_CONTAINER}>
             <TouchableOpacity onPress={handleBackWard}>
@@ -120,6 +131,11 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
               <Icon icon="forward" style={PLAYER_ICON} />
             </TouchableOpacity>
           </View>
+          <Text
+            preset="secondary"
+            text="This is a free preview powered by Napster."
+            style={{ position: "absolute", bottom: 5, alignSelf: "center" }}
+          />
         </View>
       </Screen>
     )

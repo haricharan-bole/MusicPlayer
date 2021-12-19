@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ImageBackground, Image } from "react-native"
+import { View, ImageBackground, Image, ActivityIndicator } from "react-native"
 import { Icon, Screen, Text } from "../../components"
 import { useStores } from "../../models"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -14,7 +14,6 @@ import {
   COVER_IMAGE,
   GRADIENT,
   GRADIENT_CONTAINER,
-  HEADER,
   TRACKS_CONTAINER,
   TRACK_ITEM_CONTAINER,
   TRACK_ITEM_IMAGE,
@@ -26,6 +25,7 @@ import {
   ARTIST_NAME,
 } from "./view-album-screen.styles"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
+import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
 
 export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum">> = observer(
   function AlbumListScreen({ navigation }) {
@@ -38,6 +38,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
       setSelectedTrackIndex,
       getContributingArtistNames,
       artistNames,
+      isLoading,
     } = trackStore
     const hdImage = { uri: getImageURL(AssetType.Albums, selectedAlbum.id, 500, 500) }
     const lowResImage = { uri: getImageURL(AssetType.Albums, selectedAlbum.id, 70, 70) }
@@ -102,9 +103,18 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
 
     return (
       <Screen style={ROOT} preset="fixed">
+        <NavigationBar
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
         <ImageBackground source={hdImage} style={COVER} imageStyle={COVER_IMAGE}>
           <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
-            <Text preset="header" text={selectedAlbum.name} style={HEADER} />
+            <Text
+              preset="header"
+              text={selectedAlbum.name}
+              style={{ position: "absolute", bottom: 40, left: 10, marginVertical: 10 }}
+            />
             <Text preset="default" text={selectedAlbum.artistName} style={ARTIST_NAME} />
             <Text
               preset="secondary"
@@ -114,7 +124,11 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
           </LinearGradient>
         </ImageBackground>
         <View style={TRACKS_CONTAINER}>
-          {artistNames.size > 1 && <FlatList data={[...tracks]} renderItem={renderItem} />}
+          {isLoading ? (
+            <ActivityIndicator size="large" color="red" />
+          ) : (
+            <FlatList data={[...tracks]} renderItem={renderItem} />
+          )}
         </View>
       </Screen>
     )
