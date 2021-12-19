@@ -41,8 +41,6 @@ export const TrackStoreModel = types
         return self?.artistNames?.get(artistId)?.name
       })
 
-      console.log(finalArtistNames)
-
       return finalArtistNames.toString().replace(/,/g, ", ")
     },
   }))
