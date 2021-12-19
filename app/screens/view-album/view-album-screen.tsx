@@ -31,16 +31,27 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
   function AlbumListScreen({ navigation }) {
     const { albumStore, trackStore } = useStores()
     const { selectedAlbum } = albumStore
-    const { read, tracks, clearTracks, setSelectedTrackIndex } = trackStore
-    const image = { uri: getImageURL(AssetType.Albums, selectedAlbum.id, 500, 500) }
+    const {
+      read,
+      tracks,
+      clearTracks,
+      setSelectedTrackIndex,
+      getContributingArtistNames,
+      artistNames,
+    } = trackStore
+    const hdImage = { uri: getImageURL(AssetType.Albums, selectedAlbum.id, 500, 500) }
+    const lowResImage = { uri: getImageURL(AssetType.Albums, selectedAlbum.id, 70, 70) }
 
     const fetchTracks = () => {
       read(selectedAlbum.id)
     }
 
     useEffect(() => {
-      fetchTracks()
+      let didCancel = false
+
+      !didCancel && fetchTracks()
       return () => {
+        didCancel = true
         clearTracks()
       }
     }, [])
@@ -59,7 +70,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
           style={TRACK_ITEM_CONTAINER}
           activeOpacity={0.6}
         >
-          <Image source={image} style={TRACK_ITEM_IMAGE} />
+          <Image source={lowResImage} style={TRACK_ITEM_IMAGE} />
           <View style={TRACK_ITEM_CONTENT_CONTAINER}>
             <View style={TRACK_ITEM_CONTENT_TEXT_CONTAINER}>
               <Text preset="bold" text={capitalizeFirstLetter(props.name)} />
@@ -83,7 +94,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
           key={index}
           name={item.name}
           length={item.playbackSeconds}
-          artist={item.artistName}
+          artist={getContributingArtistNames(item.contributors)}
           index={index}
         />
       )
@@ -91,7 +102,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
 
     return (
       <Screen style={ROOT} preset="fixed">
-        <ImageBackground source={image} style={COVER} imageStyle={COVER_IMAGE}>
+        <ImageBackground source={hdImage} style={COVER} imageStyle={COVER_IMAGE}>
           <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
             <Text preset="header" text={selectedAlbum.name} style={HEADER} />
             <Text preset="default" text={selectedAlbum.artistName} style={ARTIST_NAME} />
@@ -103,7 +114,7 @@ export const ViewAlbumScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
           </LinearGradient>
         </ImageBackground>
         <View style={TRACKS_CONTAINER}>
-          <FlatList data={[...tracks]} renderItem={renderItem} />
+          {artistNames.size > 1 && <FlatList data={[...tracks]} renderItem={renderItem} />}
         </View>
       </Screen>
     )

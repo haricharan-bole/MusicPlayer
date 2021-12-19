@@ -10,7 +10,7 @@ export default interface AlbumGridItemProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  artists?: ContributingArtists
+  artists?: string
 
   /**
    * An optional style override useful for padding & margin.

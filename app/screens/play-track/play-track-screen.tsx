@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ImageBackground } from "react-native"
-import { Screen, Text, Button } from "../../components"
+import { View, ImageBackground, TouchableOpacity } from "react-native"
+import { Screen, Text, Button, Icon } from "../../components"
 import { useStores } from "../../models"
 import { StackScreenProps } from "@react-navigation/stack"
 import { NavigatorParamList } from "../../navigators"
 import { AssetType, getImageURL } from "../../services/api/get-image-url"
 import LinearGradient from "react-native-linear-gradient"
-import TrackPlayer from "react-native-track-player"
+import TrackPlayer, { useProgress, useTrackPlayerEvents, Event } from "react-native-track-player"
 
 import {
   ROOT,
@@ -16,7 +16,11 @@ import {
   GRADIENT,
   GRADIENT_CONTAINER,
   HEADER,
-  TRACKS_CONTAINER,
+  PLAYER_CONTROLS_CONTAINER,
+  PLAYER_ICON,
+  PLAYER_POSITION,
+  ALBUM_NAME,
+  ARTIST_NAME,
 } from "./play-track-screen.styles"
 import AppPlayer from "../../services/AppPlayer"
 
@@ -24,8 +28,9 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
   function PlayTrackScreen({ navigation }) {
     const { trackStore, albumStore } = useStores()
     const { selectedAlbum } = albumStore
-    const { tracks, selectedTrack } = trackStore
+    const { tracks, selectedTrack, selectedTrackIndex, setSelectedTrackIndex } = trackStore
     const image = { uri: getImageURL(AssetType.Tracks, selectedAlbum.id, 500, 500) }
+    const progress = useProgress()
     const [isPlaying, setPlaying] = useState(true)
 
     const TrackPlayerTracks = tracks.map((track) => ({
@@ -43,20 +48,79 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
     }, [])
 
     useEffect(() => {
-      setPlaying(true)
-      TrackPlayer.add(TrackPlayerTracks.filter((track) => track.id === selectedTrack.id))
+      TrackPlayer.add(TrackPlayerTracks)
+      TrackPlayer.skip(selectedTrackIndex)
       TrackPlayer.play()
-      console.log(TrackPlayerTracks.filter((track) => track.id === selectedTrack.id))
+      setPlaying(true)
     }, [selectedTrack])
+
+    const handlePlayPause = () => {
+      if (isPlaying) {
+        TrackPlayer.pause()
+        setPlaying(false)
+      } else {
+        TrackPlayer.play()
+        setPlaying(true)
+      }
+    }
+
+    const handleForward = () => {
+      TrackPlayer.seekTo(Math.min(progress.position + 10, 30))
+    }
+
+    const handleBackWard = () => {
+      TrackPlayer.seekTo(progress.position - 10)
+    }
+
+    const handleNext = () => {
+      setSelectedTrackIndex(selectedTrackIndex + 1)
+      TrackPlayer.skipToNext()
+    }
+
+    const handlePrev = () => {
+      setSelectedTrackIndex(selectedTrackIndex - 1)
+      TrackPlayer.skipToPrevious()
+    }
 
     return (
       <Screen style={ROOT} preset="fixed">
         <ImageBackground source={image} style={COVER} imageStyle={COVER_IMAGE}>
           <LinearGradient style={GRADIENT_CONTAINER} colors={GRADIENT}>
             <Text preset="header" text={selectedTrack.name} style={HEADER} />
+            <Text preset="default" text={selectedTrack.albumName} style={ALBUM_NAME} />
+            <Text preset="secondary" text={selectedTrack.artistName} style={ARTIST_NAME} />
           </LinearGradient>
         </ImageBackground>
-        <View style={TRACKS_CONTAINER}></View>
+        <View style={{ flex: 0.5 }}>
+          <View style={PLAYER_POSITION}>
+            <Text preset="header">
+              {`${AppPlayer.secondsToHHMMSS(
+                Math.floor(progress.position || 0),
+              )}/${AppPlayer.secondsToHHMMSS(Math.floor(30 || 0))}`}
+            </Text>
+          </View>
+          <View style={PLAYER_CONTROLS_CONTAINER}>
+            <TouchableOpacity onPress={handleBackWard}>
+              <Icon icon="backward" style={PLAYER_ICON} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePrev}>
+              <Icon icon="prev" style={PLAYER_ICON} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePlayPause} activeOpacity={1}>
+              {isPlaying ? (
+                <Icon icon="pause" style={{ height: 60, width: 60 }} />
+              ) : (
+                <Icon icon="play" style={{ height: 60, width: 60 }} />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleNext}>
+              <Icon icon="next" style={PLAYER_ICON} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleForward}>
+              <Icon icon="forward" style={PLAYER_ICON} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </Screen>
     )
   },

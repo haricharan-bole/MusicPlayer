@@ -18,3 +18,5 @@ export type GetAlbumResult = { kind: "ok"; album: Album } | GeneralApiProblem
 
 export type GetTracksResult = { kind: "ok"; tracks: Track[] } | GeneralApiProblem
 export type GetTrackResult = { kind: "ok"; track: Track } | GeneralApiProblem
+
+export type GetArtistNames = { kind: "ok"; artistNames: string[] } | GeneralApiProblem
