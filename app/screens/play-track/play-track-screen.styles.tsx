@@ -35,9 +35,26 @@ const GRADIENT: string[] = [
   "transparent",
 ].reverse()
 
-const HEADER: TextStyle = { position: "absolute", bottom: 10, left: 10, fontSize: 40 }
+const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 10, marginVertical: 10 }
+const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 25, left: 10, marginVertical: 5 }
+const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
 
-const TRACKS_CONTAINER: ViewStyle = { flex: 0.5, alignItems: "center" }
+const PLAYER_POSITION: ViewStyle = {
+  flex: 0.5,
+  alignItems: "center",
+  flexDirection: "row",
+  width: windowWidth,
+  justifyContent: "space-around",
+}
+
+
+const PLAYER_CONTROLS_CONTAINER: ViewStyle = {
+  flex: 0.5,
+  alignItems: "center",
+  flexDirection: "row",
+  width: windowWidth,
+  justifyContent: "space-around",
+}
 
 const TRACK_ITEM_CONTAINER: ViewStyle = {
   width: windowWidth - 32,
@@ -45,6 +62,8 @@ const TRACK_ITEM_CONTAINER: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
 }
+
+const PLAYER_ICON: ImageStyle = { height: 40, width: 40 }
 
 export {
   ROOT,
@@ -54,6 +73,10 @@ export {
   GRADIENT,
   GRADIENT_CONTAINER,
   HEADER,
-  TRACKS_CONTAINER,
+  PLAYER_CONTROLS_CONTAINER,
   TRACK_ITEM_CONTAINER,
+  PLAYER_ICON,
+  PLAYER_POSITION,
+  ALBUM_NAME,
+  ARTIST_NAME
 }

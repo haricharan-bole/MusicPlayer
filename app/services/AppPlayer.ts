@@ -16,6 +16,7 @@ class AppPlayer {
           Capability.Stop,
           Capability.SeekTo,
         ],
+        alwaysPauseOnInterruption: true,
       })
 
       await TrackPlayer.setupPlayer()
