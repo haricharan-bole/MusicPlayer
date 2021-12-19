@@ -39,6 +39,8 @@ const HEADER: TextStyle = { position: "absolute", bottom: 40, left: 10, marginVe
 const ALBUM_NAME: TextStyle = { position: "absolute", bottom: 25, left: 10, marginVertical: 5 }
 const ARTIST_NAME: TextStyle = { position: "absolute", bottom: 10, left: 10, marginVertical: 5 }
 
+const PLAYER_INFO_CONTANER: ViewStyle = { flex: 0.5 }
+
 const PLAYER_POSITION: ViewStyle = {
   flex: 0.5,
   alignItems: "center",
@@ -82,4 +84,5 @@ export {
   SEEK_ICON,
   PLAY_PAUSE_ICON,
   DISCLAIMER,
+  PLAYER_INFO_CONTANER
 }

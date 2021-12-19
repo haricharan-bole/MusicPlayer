@@ -1,5 +1,4 @@
 import { GeneralApiProblem } from "./api-problem"
-import { Character } from "../../models/character/character"
 import { Album, Track } from "../../models"
 
 export interface User {

@@ -23,7 +23,8 @@ import {
   ARTIST_NAME,
   SEEK_ICON,
   PLAY_PAUSE_ICON,
-  DISCLAIMER
+  DISCLAIMER,
+  PLAYER_INFO_CONTANER,
 } from "./play-track-screen.styles"
 import AppPlayer from "../../services/AppPlayer"
 import { NavigationBar } from "../../components/navigation-bar/navigation-bar"
@@ -101,7 +102,7 @@ export const PlayTrackScreen: FC<StackScreenProps<NavigatorParamList, "ViewAlbum
             <Text preset="secondary" text={selectedTrack.artistName} style={ARTIST_NAME} />
           </LinearGradient>
         </ImageBackground>
-        <View style={{ flex: 0.5 }}>
+        <View style={PLAYER_INFO_CONTANER}>
           <View style={PLAYER_POSITION}>
             {progress.position === 0 ? (
               <ActivityIndicator size="large" color="red" />
